@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2021 a las 20:23:35
+-- Tiempo de generación: 14-11-2021 a las 20:32:16
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -359,7 +359,7 @@ CREATE TABLE `personal_access_tokens` (
 CREATE TABLE `proyecto` (
   `idProyecto` int(11) NOT NULL,
   `nomProyecto` int(255) NOT NULL,
-  `modalidad` int(100) NOT NULL,
+  `modalidad` varchar(100) NOT NULL,
   `idAlumno` int(11) NOT NULL,
   `idPeriodo` int(11) NOT NULL,
   `idAsesorI` int(11) NOT NULL,
