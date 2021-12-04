@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2021 a las 20:32:16
+-- Tiempo de generación: 04-12-2021 a las 02:24:35
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -18,8 +18,28 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `servicio-externo`
+-- Base de datos: `se`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `alcance`
+--
+
+CREATE TABLE `alcance` (
+  `idAlcance` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `alcance`
+--
+
+INSERT INTO `alcance` (`idAlcance`, `nombre`) VALUES
+(1, 'ESTATAL'),
+(2, 'NACIONAL'),
+(3, 'INTERNACIONAL');
 
 -- --------------------------------------------------------
 
@@ -34,14 +54,6 @@ CREATE TABLE `alumno` (
   `telefono` varchar(100) NOT NULL,
   `idCarrera` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `alumno`
---
-
-INSERT INTO `alumno` (`idAlumno`, `nombre`, `email`, `telefono`, `idCarrera`) VALUES
-(1, 'ABRAHAM VICTOR ZARAGOZA RODRIGUEZ', 'VICKO8148@GMAIL.COM', '9516129964', 2),
-(3, 'ABIGAIL JOSEFINA CUEVAS ZÁRATE', 'ABI@GMAIL.COM', '9512782182', 6);
 
 -- --------------------------------------------------------
 
@@ -78,14 +90,6 @@ CREATE TABLE `asesorexterno` (
   `telefono` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `asesorexterno`
---
-
-INSERT INTO `asesorexterno` (`idAsesorE`, `nombre`, `email`, `telefono`) VALUES
-(2, 'JUAN PEREZ', 'JUAN@GMAIL.COM', '534323'),
-(3, 'LUIS', 'LUIS@GMAIL.COM', '9378133');
-
 -- --------------------------------------------------------
 
 --
@@ -98,14 +102,6 @@ CREATE TABLE `asesorinterno` (
   `email` varchar(100) NOT NULL,
   `telefono` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `asesorinterno`
---
-
-INSERT INTO `asesorinterno` (`idAsesorI`, `nombre`, `email`, `telefono`) VALUES
-(1, 'JUAN LUIS MENDEZ', 'JUAN-MENDEZ@GMAIL.COM', '9512782182'),
-(3, 'CARLOS ENRIQUE MORALES BAUTISTA', 'CARLOS.MB@VOAXACA.TECNM.MX', '916387312');
 
 -- --------------------------------------------------------
 
@@ -141,22 +137,28 @@ CREATE TABLE `convenio` (
   `fechaFirma` date NOT NULL,
   `fechaVigencia` date NOT NULL,
   `estatus` varchar(100) NOT NULL,
+  `urlConvenio` varchar(500) NOT NULL,
+  `carreras` varchar(500) NOT NULL,
   `idTipoCon` int(11) NOT NULL,
   `idInstancia` int(11) NOT NULL,
-  `id` bigint(20) UNSIGNED NOT NULL
+  `idUsuario` bigint(20) UNSIGNED NOT NULL,
+  `idIndicador` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `detalleindicador`
+-- Volcado de datos para la tabla `convenio`
 --
 
-CREATE TABLE `detalleindicador` (
-  `idDetalle` int(11) NOT NULL,
-  `idIndicador` int(11) NOT NULL,
-  `idConvenio` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `convenio` (`idConvenio`, `folio`, `fechaFirma`, `fechaVigencia`, `estatus`, `urlConvenio`, `carreras`, `idTipoCon`, `idInstancia`, `idUsuario`, `idIndicador`) VALUES
+(12, '47/GTyV/2021', '2021-10-04', '2023-10-04', 'VIGENTE', 'https://snitmx-my.sharepoint.com/:b:/r/personal/vin_voaxaca_tecnm_mx/Documents/CONVENIOS%20PDF%C2%B4S/CONVENIOS%202021/047-CR-2021.PDF?csf=1&web=1&e=j5esKY', '3', 3, 11, 1, 20),
+(13, '48/GTyV/2021', '2021-11-04', '2023-10-04', 'VIGENTE', 'https://snitmx-my.sharepoint.com/:b:/r/personal/vin_voaxaca_tecnm_mx/Documents/CONVENIOS%20PDF%C2%B4S/CONVENIOS%202021/047-CM-2021.pdf?csf=1&web=1&e=yxS2yn', '3', 1, 11, 1, 20),
+(14, '55/GTyV/2021', '2021-11-03', '2022-11-03', 'VIGENTE', 'https://snitmx-my.sharepoint.com/:b:/r/personal/vin_voaxaca_tecnm_mx/Documents/CONVENIOS%20PDF%C2%B4S/CONVENIOS%202021/055-CM-2021.PDF?csf=1&web=1&e=KCDzB1', '2,3,4,5,6', 3, 12, 1, 13),
+(15, '64/GTyV/2021', '2021-10-29', '2024-10-29', 'VIGENTE', 'https://snitmx-my.sharepoint.com/:b:/r/personal/vin_voaxaca_tecnm_mx/Documents/CONVENIOS%20PDF%C2%B4S/CONVENIOS%202021/047-CM-2021.pdf?csf=1&web=1&e=YzEH5I', '5', 3, 13, 1, 20),
+(16, '58/GTyV/2021', '2021-10-14', '2024-10-14', 'VIGENTE', 'https://snitmx-my.sharepoint.com/:b:/r/personal/vin_voaxaca_tecnm_mx/Documents/CONVENIOS%20PDF%C2%B4S/CONVENIOS%202021/058-CM-2021-FILATELIA.PDF?csf=1&web=1&e=swQ5SR', '2,6', 3, 10, 1, 20),
+(17, '59/GTyV/2021', '2021-10-14', '2024-10-14', 'VIGENTE', 'https://snitmx-my.sharepoint.com/:b:/r/personal/vin_voaxaca_tecnm_mx/Documents/CONVENIOS%20PDF%C2%B4S/CONVENIOS%202021/058-CM-2021-FILATELIA.PDF?csf=1&web=1&e=sBwEiX', '2,6', 1, 10, 1, 20),
+(18, '60/GTyV/2021', '2021-10-14', '2024-10-14', 'VIGENTE', 'https://snitmx-my.sharepoint.com/:b:/r/personal/vin_voaxaca_tecnm_mx/Documents/CONVENIOS%20PDF%C2%B4S/CONVENIOS%202021/060-CSS-2021-FILATELIA.PDF?csf=1&web=1&e=gk9dS6', '2,6', 4, 10, 1, 20),
+(19, '65/GTyV/2021', '2021-10-29', '2024-10-29', 'VIGENTE', 'https://snitmx-my.sharepoint.com/:b:/r/personal/vin_voaxaca_tecnm_mx/Documents/CONVENIOS%20PDF%C2%B4S/CONVENIOS%202021/065-CR-2021.PDF?csf=1&web=1&e=S1WYgM', '5', 1, 13, 1, 20),
+(20, '68/GTyV/2021', '2021-11-01', '2024-11-01', 'VIGENTE', 'https://snitmx-my.sharepoint.com/:b:/r/personal/vin_voaxaca_tecnm_mx/Documents/CONVENIOS%20PDF%C2%B4S/CONVENIOS%202021/068-CM-2021.PDF?csf=1&web=1&e=L0ahtk', '2,3,4,5,6', 3, 12, 1, 13);
 
 -- --------------------------------------------------------
 
@@ -223,15 +225,8 @@ CREATE TABLE `indicador` (
 --
 
 INSERT INTO `indicador` (`idIndicador`, `nombre`, `descripcion`) VALUES
-(1, 'GESTIONAR PROGRAMAS DE SERVICIO SOCIAL', 'GESTIONAR PROGRAMAS DE SERVICIO SOCIAL QUE INCIDA EN EL NUMERO DE ESTUDIANTES QUE PUEDAN REALIZAR SU SERVICIO EN LA ATENCIÓN DE LOS PROBLEMAS REGIONALES O NACIONALES PRIORITARIOS.'),
-(2, 'ESTABLECER MECANISMOS', 'ESTABLECER MECANISMOS DE COMUNICACIÓN CON INSTITUCIONES DE LOS TRES NIVELES DE GOBIERNO.'),
-(3, 'FIRMAR CONVENIOS', 'FIRMAR CONVENIOS CON DEPENDENCIAS QUE ATIENDAN PROBLEMAS REGIONALES O NACIONALES PRIORITARIOS.'),
-(4, 'INCREMENTAR Y GESTIONAR', 'INCREMENTAR Y GESTIONAR EL NÚMERO DE COMUNIDADES BENEFICIADAS POR EL SERVICIO SOCIAL.'),
-(5, 'REALIZAR CONVENIOS', 'REALIZAR CONVENIOS CON COMUNIDADES AFINES AL PROGRAMA EDUCATIVO.'),
-(6, 'REGISTRAR LOS PROGRAMAS', 'REGISTRAR LOS PROGRAMAS DE SERVICIO SOCIAL DE LAS COMUNIDADES.'),
-(7, 'PROMOVER PROGRAMAS', 'PROMOVER PROGRAMAS DE SERVICIO SOCIAL EN COMUNIDADES PRIORITARIAS O DE MARGINACIÓN.'),
-(8, 'INCREMENTAR EL NÚMERO', 'INCREMENTAR EL NÚMERO DE PERSONAS BENEFICIADAS POR LOS PRESTANTES DE SERVICIO SOCIAL.'),
-(9, 'MANTENER ACTUAIZADO EL SII', 'MANTENER ACTUALIZADO EL SISTEMA INTEGRAL DE INFORMACIÓN PARA GENERAR LA ESTADÍSTICA DE PERSONAS BENEFICIADAS POR EL SERVICIO SOCIAL.'),
+(5, 'REUNIONES DE TRABAJO', 'REALIZAR REUNIONES DE TRABAJO QUE CONTRIBUYAN A LA SOLUCIÓN DE PROBLEMAS REGIONALES Y NACIONALES.'),
+(6, 'FIRMAS CONVENIO CON OTRAS IES.', 'FIRMAR CONVENIO O ACUERDOS DE COOPERACIÓN CON OTRAS IES NACIONALES O INTERNACIONALES.'),
 (10, 'ESTABLECER CONVENIOS', 'ESTABLECER LOS CONVENIOS DE COLABORACIÓN CON ESQUEMAS DE INVERSIÓN EN PROYECTOS DE CIENCIA, TECNOLOGÍA E INNOVACIÓN.'),
 (11, 'PROPONER ESQUEMAS', 'PROPONER ESQUEMAS DE INVERSIÓN PARA ESTABLECER PROYECTOS DE CIENCIA, TECNOLOGÍA E INNOVACIÓN EN LAS REGIONES DEL ESTADO.'),
 (12, 'PARTICIPAR EN ESQUEMAS', 'PARTICIPAR EN ESQUEMAS DE INVERSIÓN EN PROYECTOS DE CIENCIA, TECNOLOGÍA E INNOVACIÓN EN EL SECTOR REGIONAL.'),
@@ -240,7 +235,22 @@ INSERT INTO `indicador` (`idIndicador`, `nombre`, `descripcion`) VALUES
 (15, 'CONSEJO DE VINCULACIÓN', 'MANTENER EL CONSEJO DE VINCULACIÓN.'),
 (16, 'REALIZAR REUNIONES', 'REALIZAR REUNIONES ORDINARIAS DEL CONSEJO DE VINCULACIÓN.'),
 (17, 'MECANISMOS DE VINCULACION', 'ESTABLECER MECANISMOS DE VINCULACIÓN CON LOS DIFERENTES SECTORES DE LA INICIATIVA PRIVADA.'),
-(18, 'ACUERDO DE COOPERACIÓN', 'FIRMAR CONVENIO O ACUERDO DE COOPERACIÓN ENTRE INSTITUTOS TECNOLÓGICOS O CENTROS ADSCRITOS AL TECNM.');
+(18, 'ACUERDO DE COOPERACIÓN', 'FIRMAR CONVENIO O ACUERDO DE COOPERACIÓN ENTRE INSTITUTOS TECNOLÓGICOS O CENTROS ADSCRITOS AL TECNM.'),
+(19, 'SOLUCIÓN DE PROBLEMAS.', 'REALIZAR REUNIONES DE TRABAJO QUE CONTRIBUYAN A LA SOLUCIÓN DE PROBLEMAS REGIONALES Y NACIONALES.'),
+(20, 'CONTRATOS DE VINCULACIÓN. ', 'FIRMAR CONVENIOS O CONTRATOS DE VINCULACIÓN CON LOS SECTORES PÚBLICO, SOCIAL Y PRIVADO.'),
+(21, 'PROPONER ESQUEMAS DE CONVENIOS.', 'PROPONER ESQUEMAS DE CONVENIOS O CONTRATOS CON LOS SECTORES PÚBLICO, SOCIAL Y PRIVADO EN LAS REGIONES DEL ESTADO.'),
+(22, 'SELECCIÓN DE INSTANCIAS', 'SELECCIONAR INSTANCIAS PARA QUE PARTICIPEN EN ESQUEMAS DE CONVENIOS O CONTRATOS DE VINCULACIÓN DE LOS DIFERENTES SECTORES.'),
+(23, 'REGISTRO DE PROPIEDAD INTELECTUAL.', 'REGISTRAR PROPIEDAD INTELECTUAL O MARCA REGISTRADA.'),
+(24, 'PROMOCIÓN DE PROTECCIÓN A LA PROPIEDAD INTELECTUAL.', 'CURSO, TALLER O PLÁTICAS PARA LA PROMOCIÓN DE LA PROTECCIÓN DE LA PROPIEDAD INTELECTUAL.'),
+(25, 'EMPRESAS INCUBADAS.', 'GENERAR EMPRESAS INCUBADAS POR EL CIIE DEL INSTITUTO.'),
+(26, 'SERVICIOS ESPECIALIZADOS.', 'PROMOVER LOS SERVICIOS ESPECIALIZADOS QUE OFRECE EL CIIE.'),
+(27, 'FORTALECIMIENTO DE LA INCUBACIÓN.', 'CURSO, TALLER O PLÁTICAS PARA EL FORTALECIMIENTO DE LA INCUBACIÓN DE EMPRESAS.'),
+(28, 'ENCUESTA A EGRESADOS.', 'APLICAR ENCUESTA A EGRESADOS DEL INSTITUTO.'),
+(29, 'ENCUENTRO DE EGRESADOS Y EMPLEADORES.', 'REALIZAR EL ENCUENTRO DE EGRESADOS Y EMPLEADORES.'),
+(30, 'SEGUIMIENTO DE LAS ESTADÍSTICAS DE EGRESADOS.', 'REPORTAR EL SEGUIMIENTO DE LAS ESTADÍSTICAS DE EGRESADOS.'),
+(31, 'PROMOVER LA PARTICIPACIÓN.', 'PROMOVER LA PARTICIPACIÓN DE ESTUDIANTES Y DOCENTES EN PROYECTOS DE EMPRENDIMIENTO CON ENFOQUE EN LA INNOVACIÓN Y SUSTENTABILIDAD.'),
+(32, 'FORTALECIMIENTO DEL EMPRENDIMIENTO. ', 'CURSOS, TALLERES, PLÁTICAS PARA EL FORTALECIMIENTO DEL EMPRENDIMIENTO CON ENFOQUE EN LA INNOVACIÓN Y SUSTENTABILIDAD.'),
+(33, 'PARTICIPACIÓN EN CONCURSOS.', 'PARTICIPACIÓN EN CONCURSOS O CONVOCATORIAS DE EMPRENDIMIENTO.');
 
 -- --------------------------------------------------------
 
@@ -252,26 +262,25 @@ CREATE TABLE `instancia` (
   `idInstancia` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `responsable` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `telefono` varchar(100) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `telefono` varchar(100) DEFAULT NULL,
   `idGiro` int(11) DEFAULT NULL,
   `idSector` int(11) DEFAULT NULL,
   `idTipoSec` int(11) DEFAULT NULL,
   `idTamanio` int(11) DEFAULT NULL,
   `idAreaC` int(11) DEFAULT NULL,
-  `alcance` varchar(100) NOT NULL
+  `idAlcance` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `instancia`
 --
 
-INSERT INTO `instancia` (`idInstancia`, `nombre`, `responsable`, `email`, `telefono`, `idGiro`, `idSector`, `idTipoSec`, `idTamanio`, `idAreaC`, `alcance`) VALUES
-(1, 'COLEGIOS DE ESTUDIOS DE INFORMÁTICA', 'PAOLA ARRONA', 'CEI@GMAIL.COM', '9512782182', 1, 6, 6, 1, 1, 'NACIONAL'),
-(2, 'EL FIDEICOMISO DEL JARDÍN HISTÓRICO ETNOBOTÁNICO DEL CENTRO CULTURAL SANTO DOMINGO', 'LIC. ARMANDO LABRA MANJARREZ', 'jetnobot@prodigy.net.mx', '(951) 516 5325', 3, 1, 5, 3, 3, 'NACIONAL'),
-(3, 'LA ASOCIACIÓN PARA LA CONSERVACIÓN E INVESTIGACIÓN DE LA FLORA Y FAUNA OAXAQUEÑA.', 'C. VALFREN BAUTISTA GONZÁLEZ', 'webadmin@finanzasoaxaca.gob.mx', '(951) 5157828 / (951) 5133128', 1, 1, 8, NULL, 3, 'NACIONAL'),
-(4, 'EL INSTITUTO NACIONAL DE ESTADÍSTICA, GEOGRAFÍA E INFORMÁTICA (INEGI)', 'ING. FERNANDO LUGO FLORES', 'atencion.usuarios@inegi.org.mx', '800 111 46 34', 3, 1, 6, NULL, 2, 'NACIONAL'),
-(5, 'INSTITUTO TECNOLOGICO SUPERIOR DE TEPOSCOLULA \"ITSTE\"', '', 'SIN EMAIL', '01 (951) 51 7 07 88 / 51 7 04 44', NULL, 1, 6, NULL, 5, 'NACIONAL');
+INSERT INTO `instancia` (`idInstancia`, `nombre`, `responsable`, `email`, `telefono`, `idGiro`, `idSector`, `idTipoSec`, `idTamanio`, `idAreaC`, `idAlcance`) VALUES
+(10, 'MUSEO DE LA FILATELIA DE OAXACA A.C', 'SIN RESPONSABLE', 'DIFUSION@MUFI.ORG.MX', '(951) 514 2366 / 514 2375', 3, 1, 5, 2, 5, 2),
+(11, 'INNOVACCIÓN TECNOLÓGICA APLICADA A LAS GEOCIENCIAS, ACADEMIA DE INVESTIGACIÓN A.C.', 'DOCTOR ALFREDO ORGEL ROMERO', NULL, NULL, 3, 1, 8, NULL, 3, 2),
+(12, 'COLEGIO DE ESTUDIOS EN INFORMATICA, SOCIEDAD CIVIL SEDE OAXACA.', 'L.A. RAFAEL PLACIDO AGUIRRE GORDILLO', NULL, ' 951 501 1891', 3, 1, 8, 3, 5, 2),
+(13, 'TECOALT ASESORÍA AMBIENTAL Y SOLUCIONES ALTERNATIVAS S.A DE C.V', 'ING. EUGENIO REYNOSA GUERRERO', 'INFO@TECOATL-AMBIENTAL.COM', '951 517 0036', 1, 1, 2, 3, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -358,13 +367,13 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `proyecto` (
   `idProyecto` int(11) NOT NULL,
-  `nomProyecto` int(255) NOT NULL,
+  `nomProyecto` varchar(255) NOT NULL,
   `modalidad` varchar(100) NOT NULL,
   `idAlumno` int(11) NOT NULL,
   `idPeriodo` int(11) NOT NULL,
   `idAsesorI` int(11) NOT NULL,
   `idAsesorE` int(11) NOT NULL,
-  `idinstancia` int(11) NOT NULL
+  `idInstancia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -483,6 +492,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 
 --
+-- Indices de la tabla `alcance`
+--
+ALTER TABLE `alcance`
+  ADD PRIMARY KEY (`idAlcance`);
+
+--
 -- Indices de la tabla `alumno`
 --
 ALTER TABLE `alumno`
@@ -520,14 +535,7 @@ ALTER TABLE `convenio`
   ADD PRIMARY KEY (`idConvenio`),
   ADD KEY `idTipoCon` (`idTipoCon`),
   ADD KEY `idInstancia` (`idInstancia`),
-  ADD KEY `id` (`id`);
-
---
--- Indices de la tabla `detalleindicador`
---
-ALTER TABLE `detalleindicador`
-  ADD PRIMARY KEY (`idDetalle`),
-  ADD KEY `idConvenio` (`idConvenio`),
+  ADD KEY `id` (`idUsuario`),
   ADD KEY `idIndicador` (`idIndicador`);
 
 --
@@ -564,7 +572,8 @@ ALTER TABLE `instancia`
   ADD KEY `instancia_ibfk_2` (`idGiro`),
   ADD KEY `instancia_ibfk_3` (`idTipoSec`),
   ADD KEY `instancia_ibfk_4` (`idTamanio`),
-  ADD KEY `instancia_ibfk_6` (`idAreaC`);
+  ADD KEY `instancia_ibfk_6` (`idAreaC`),
+  ADD KEY `idAlcance` (`idAlcance`);
 
 --
 -- Indices de la tabla `migrations`
@@ -597,7 +606,7 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `proyecto`
   ADD PRIMARY KEY (`idProyecto`),
-  ADD KEY `proyecto_ibfk_1` (`idinstancia`),
+  ADD KEY `proyecto_ibfk_1` (`idInstancia`),
   ADD KEY `idAsesorE` (`idAsesorE`),
   ADD KEY `idAsesorI` (`idAsesorI`),
   ADD KEY `idAlumno` (`idAlumno`),
@@ -639,6 +648,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `alcance`
+--
+ALTER TABLE `alcance`
+  MODIFY `idAlcance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
@@ -672,13 +687,7 @@ ALTER TABLE `carrera`
 -- AUTO_INCREMENT de la tabla `convenio`
 --
 ALTER TABLE `convenio`
-  MODIFY `idConvenio` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `detalleindicador`
---
-ALTER TABLE `detalleindicador`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idConvenio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
@@ -702,13 +711,13 @@ ALTER TABLE `giro`
 -- AUTO_INCREMENT de la tabla `indicador`
 --
 ALTER TABLE `indicador`
-  MODIFY `idIndicador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idIndicador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `instancia`
 --
 ALTER TABLE `instancia`
-  MODIFY `idInstancia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idInstancia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -738,7 +747,7 @@ ALTER TABLE `proyecto`
 -- AUTO_INCREMENT de la tabla `sector`
 --
 ALTER TABLE `sector`
-  MODIFY `idSector` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idSector` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `tamanio`
@@ -781,20 +790,20 @@ ALTER TABLE `alumno`
 ALTER TABLE `convenio`
   ADD CONSTRAINT `convenio_ibfk_1` FOREIGN KEY (`idTipoCon`) REFERENCES `tipoconvenio` (`idTipoConvenio`),
   ADD CONSTRAINT `convenio_ibfk_2` FOREIGN KEY (`idInstancia`) REFERENCES `instancia` (`idInstancia`),
-  ADD CONSTRAINT `convenio_ibfk_3` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `convenio_ibfk_3` FOREIGN KEY (`idUsuario`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `convenio_ibfk_4` FOREIGN KEY (`idIndicador`) REFERENCES `indicador` (`idIndicador`);
 
 --
--- Filtros para la tabla `detalleindicador`
+-- Filtros para la tabla `instancia`
 --
-ALTER TABLE `detalleindicador`
-  ADD CONSTRAINT `detalleindicador_ibfk_1` FOREIGN KEY (`idConvenio`) REFERENCES `convenio` (`idConvenio`),
-  ADD CONSTRAINT `detalleindicador_ibfk_2` FOREIGN KEY (`idIndicador`) REFERENCES `indicador` (`idIndicador`);
+ALTER TABLE `instancia`
+  ADD CONSTRAINT `instancia_ibfk_1` FOREIGN KEY (`idAlcance`) REFERENCES `alcance` (`idAlcance`);
 
 --
 -- Filtros para la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  ADD CONSTRAINT `proyecto_ibfk_1` FOREIGN KEY (`idinstancia`) REFERENCES `instancia` (`idInstancia`),
+  ADD CONSTRAINT `proyecto_ibfk_1` FOREIGN KEY (`idInstancia`) REFERENCES `instancia` (`idInstancia`),
   ADD CONSTRAINT `proyecto_ibfk_2` FOREIGN KEY (`idAsesorE`) REFERENCES `asesorexterno` (`idAsesorE`),
   ADD CONSTRAINT `proyecto_ibfk_3` FOREIGN KEY (`idAsesorI`) REFERENCES `asesorinterno` (`idAsesorI`),
   ADD CONSTRAINT `proyecto_ibfk_4` FOREIGN KEY (`idAlumno`) REFERENCES `alumno` (`idAlumno`),
