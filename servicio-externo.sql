@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-12-2021 a las 18:59:31
+-- Tiempo de generación: 30-12-2021 a las 21:30:32
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -51,7 +51,7 @@ CREATE TABLE `alumno` (
   `idAlumno` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `telefono` varchar(100) DEFAULT NULL,
+  `telefono` varchar(100) NOT NULL,
   `idCarrera` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -86,8 +86,8 @@ INSERT INTO `areaconoc` (`idAreaC`, `nomAreaC`) VALUES
 CREATE TABLE `asesorexterno` (
   `idAsesorE` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `telefono` varchar(100) DEFAULT NULL
+  `email` varchar(100) NOT NULL,
+  `telefono` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -106,8 +106,8 @@ INSERT INTO `asesorexterno` (`idAsesorE`, `nombre`, `email`, `telefono`) VALUES
 CREATE TABLE `asesorinterno` (
   `idAsesorI` int(70) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `telefono` varchar(100) DEFAULT NULL
+  `email` varchar(100) NOT NULL,
+  `telefono` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
