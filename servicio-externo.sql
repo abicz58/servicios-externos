@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-12-2021 a las 02:17:27
+-- Tiempo de generación: 30-12-2021 a las 18:59:31
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -51,7 +51,7 @@ CREATE TABLE `alumno` (
   `idAlumno` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `telefono` varchar(100) NOT NULL,
+  `telefono` varchar(100) DEFAULT NULL,
   `idCarrera` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -86,8 +86,8 @@ INSERT INTO `areaconoc` (`idAreaC`, `nomAreaC`) VALUES
 CREATE TABLE `asesorexterno` (
   `idAsesorE` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `telefono` varchar(100) NOT NULL
+  `email` varchar(100) DEFAULT NULL,
+  `telefono` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -106,8 +106,8 @@ INSERT INTO `asesorexterno` (`idAsesorE`, `nombre`, `email`, `telefono`) VALUES
 CREATE TABLE `asesorinterno` (
   `idAsesorI` int(70) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `telefono` varchar(100) NOT NULL
+  `email` varchar(100) DEFAULT NULL,
+  `telefono` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `convenio` (
   `idTipoCon` int(11) NOT NULL,
   `idInstancia` int(11) NOT NULL,
   `idUsuario` bigint(20) UNSIGNED NOT NULL,
-  `idIndicador` int(11) NOT NULL
+  `idIndicador` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -844,8 +844,8 @@ CREATE TABLE `proyecto` (
   `modalidad` varchar(100) NOT NULL,
   `idAlumno` int(11) NOT NULL,
   `idPeriodo` int(11) NOT NULL,
-  `idAsesorI` int(11) NOT NULL,
-  `idAsesorE` int(11) NOT NULL,
+  `idAsesorI` int(11) DEFAULT NULL,
+  `idAsesorE` int(11) DEFAULT NULL,
   `idInstancia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
